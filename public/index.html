@@ -11,15 +11,55 @@
     integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
     crossorigin="anonymous"
   >
+ <!-- <script type="text/javascript" src="../assets/gsap.min.js"></script>
+ <script type="text/javascript" src="../scrollmagic/plugins/animation.gsap.min.js"></script>
+  -->
+  <script src="js/scrollmagic/minified/ScrollMagic.min.js"></script>
   <style>
     .container { text-align: center; margin-top: 2em; }
   </style>
+  	<link rel="stylesheet" href="./style.css" type="text/css">
 </head>
 <body>
-  <div class="container">
-    <h1>Hello World</h1>
-    <div id="app">If you can read this, your react app is not running...</div>
+  <div id="content-wrapper">
+      <div id="example-wrapper" class="horizontal">
+          <div class="scrollContent">
+              <section>
+                  <script>
+                    var controller = new ScrollMagic.Controller({vertical: false});
+                  </script>
+              </section>
+
+              <section class="demo fullwidth">
+                <div class="parallaxContainer">
+                  <div class="layer1">
+                    <h1>Hello World</h1>
+                    <div id="app">If you can read this, your react app is not running...</div>
+                  </div>
+                </div>
+              </section>
+
+              <script>
+                $(function () { // wait for document ready
+                  // build tween
+                  const tween = new TimelineMax ()
+                    .add([
+                      TweenMax.to("#parallaxContainer .layer1", 1, {backgroundPosition: "-40% 0", ease: Linear.easeNone})
+                    ]);
+
+                  // build scene
+                  const scene = new ScrollMagic.Scene({triggerElement: "#parallaxContainer", duration: 2000, offset: 450})
+                          .setTween(tween)
+                          .setPin("#parallaxContainer")
+                          .addIndicators() // add indicators (requires plugin)
+                          .addTo(controller);
+                });
+              </script>
+          </div>
+      </div>
   </div>
+
   <script src="/bundle.js" charset="utf-8"></script>
+
 </body>
 </html>
